@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState, type PointerEvent } from 'react'
+import type { GameProps } from '..'
+import BackButton from '../../components/BackButton'
 import type { Judgement } from './chart'
 import { createEngine, type Hud, type Phase, type Results } from './engine'
 import './RailsGame.css'
 
 const JUDGE_TEXT: Record<Judgement, string> = { perfect: 'Perfect', great: 'Great', good: 'Good', miss: 'Miss' }
 
-export default function RailsGame({ onExit }: { onExit: () => void }) {
+export default function RailsGame({ onExit }: GameProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [phase, setPhase] = useState<Phase>('ready')
   const [count, setCount] = useState<string | null>(null)
@@ -30,14 +32,7 @@ export default function RailsGame({ onExit }: { onExit: () => void }) {
     <div className="stage" onPointerDown={onDown} onPointerUp={onUp} onPointerCancel={onUp}>
       <canvas ref={canvasRef} className="rails" />
 
-      <button
-        className="back"
-        aria-label="Back to games"
-        onPointerDown={(e) => e.stopPropagation()}
-        onClick={onExit}
-      >
-        ‹
-      </button>
+      <BackButton onClick={onExit} />
 
       {inGame && (
         <div className="hud">

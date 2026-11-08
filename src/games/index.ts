@@ -1,6 +1,8 @@
 import type { ComponentType } from 'react'
 import RailsGame from './rails/RailsGame'
 import RailsIcon from './rails/RailsIcon'
+import TileWalk from './tilewalk/TileWalk'
+import TileWalkIcon from './tilewalk/TileWalkIcon'
 
 export type GameProps = { onExit: () => void }
 
@@ -23,5 +25,13 @@ export const GAMES: GameEntry[] = [
     tint: 'linear-gradient(160deg, #6a2fc4, #1b0942)',
     Icon: RailsIcon,
     Game: RailsGame,
+  },
+  {
+    id: 'tilewalk',
+    title: 'Tile Walk',
+    blurb: 'Find the safe path',
+    tint: 'linear-gradient(170deg, #2a1d45, #080512)',
+    Icon: TileWalkIcon,
+    Game: TileWalk,
   },
 ]

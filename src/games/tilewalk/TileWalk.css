@@ -1,0 +1,105 @@
+.tilewalk {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: none;
+  background: #080512;
+}
+
+.tw-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.tw-hud,
+.tw-panel {
+  position: absolute;
+  pointer-events: none;
+}
+
+.tw-hud {
+  top: calc(var(--safe-top) + 14px);
+  right: calc(var(--safe-right) + 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tw-row {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.tw-row small {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.tw-meta {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.tw-panel {
+  left: calc(var(--safe-left) + 28px);
+  right: calc(var(--safe-right) + 28px);
+  top: calc(var(--safe-top) + 64px);
+  padding: 22px 24px;
+  border-radius: 22px;
+  text-align: center;
+  background: rgb(8 5 18 / 0.7);
+  box-shadow: 0 0 0 1px rgb(255 210 150 / 0.12) inset;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  animation: tw-in 500ms ease-out;
+}
+
+.tw-panel h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: #ffe2b8;
+  text-shadow: 0 0 24px rgb(255 170 90 / 0.5);
+}
+
+.tw-panel p {
+  margin: 8px 0;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.tw-panel .tw-cta {
+  margin-top: 16px;
+  font-weight: 700;
+  color: var(--fg);
+  animation: tw-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes tw-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes tw-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tw-panel .tw-cta {
+    animation: none;
+  }
+}

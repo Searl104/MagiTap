@@ -1,7 +1,8 @@
 // Game state + loop, kept outside React so the 60fps loop never re-renders.
 // React only hears about phase changes, the countdown and each judgement.
 
-import { blip, createAudio, kick, laneTone } from './audio'
+import { blip, createAudio } from '../../lib/audio'
+import { kick, laneTone } from './audio'
 import { BEAT, COUNT_IN_BEATS, LANES, POINTS, WINDOWS, buildChart, grade, type Judgement, type Note } from './chart'
 import { drawFrame, laneAtX, makeGeometry, type Fx, type Geometry } from './draw'
 
