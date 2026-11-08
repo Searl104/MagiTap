@@ -1,0 +1,82 @@
+.launcher {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: none;
+  background: radial-gradient(120% 70% at 50% 0%, var(--bg-2), var(--bg) 70%);
+  padding: calc(var(--safe-top) + 28px) calc(var(--safe-right) + 20px) var(--safe-bottom) calc(var(--safe-left) + 20px);
+  animation: launcher-in 250ms ease-out;
+}
+
+.launcher header h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.launcher header p {
+  margin: 4px 0 0;
+  font-size: 17px;
+  color: var(--muted);
+}
+
+.tiles {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  transition: transform 0.12s ease-out;
+}
+
+.tile:active {
+  transform: scale(0.95);
+}
+
+.tile .art {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgb(255 247 214 / 0.12) inset,
+    0 10px 30px rgb(0 0 0 / 0.35);
+}
+
+.tile .art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.tile .title {
+  margin-top: 10px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.tile .blurb {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+@keyframes launcher-in {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+}

@@ -187,6 +187,10 @@ export function createEngine(ui: Ui) {
       ro.disconnect()
       window.removeEventListener('keydown', onKeyDown)
       window.removeEventListener('keyup', onKeyUp)
+      // Leaving the game: silence anything still scheduled.
+      void audio?.close()
+      audio = null
+      phase = 'ready'
     }
   }
 
