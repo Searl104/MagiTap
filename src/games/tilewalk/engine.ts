@@ -24,6 +24,20 @@ const CRACK_TIME = 0.4
 const FALL_TIME = 1.2
 const EXIT_TIME = 1.6
 const RESTART_DELAY = 0.8
+/** Tap the next tile within this many seconds of landing and it is safe. Never shown to the player. */
+const CONFIDENCE_WINDOW = 0.5
+
+/** Moves a trap off `col` onto another standing tile in the row, keeping the row's trap count. */
+function makeSafe(tiles: Tile[], col: number) {
+  const tile = tiles[col]
+  if (!tile.trap) return
+  const swap = tiles.find((t) => !t.trap && t.fallT === null)
+  if (!swap) return
+  swap.trap = true
+  swap.cracks = tile.cracks
+  tile.trap = false
+  tile.cracks = []
+}
 
 function makeMotes(): Mote[] {
   return Array.from({ length: 70 }, () => ({
@@ -89,6 +103,11 @@ export function createTileWalk(ui: Ui) {
   }
 
   function hopTo(targetRow: number, targetCol: number | null, now: number) {
+    // The secret is confidence: commit to the next tile quickly and it holds.
+    // (In idle, modeT0 is when the orb landed or the attempt began.)
+    if (targetRow <= ROWS && targetCol !== null && mode === 'idle' && now - modeT0 <= CONFIDENCE_WINDOW) {
+      makeSafe(rows[targetRow - 1], targetCol)
+    }
     hop = { from: [...orb], to: restPos(targetRow, targetCol), t0: now, row: targetRow, col: targetCol }
     setMode('hop', now)
     sound(hopSound)

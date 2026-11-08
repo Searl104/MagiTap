@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -5,8 +6,13 @@ import { VitePWA } from 'vite-plugin-pwa'
 // BASE_PATH is set by the GitHub Pages workflow (e.g. "/MagiTap/").
 const base = process.env.BASE_PATH ?? '/'
 
+// A fresh UUID per build. The deploy workflow builds once per push to main,
+// so every deployed push gets its own ID (shown on the launcher).
+const buildId = process.env.BUILD_ID ?? randomUUID()
+
 export default defineConfig({
   base,
+  define: { __BUILD_ID__: JSON.stringify(buildId) },
   server: { host: true }, // expose on the LAN so you can open it on an iPhone
   preview: { host: true },
   plugins: [

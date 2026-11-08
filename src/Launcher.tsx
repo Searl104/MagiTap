@@ -1,6 +1,8 @@
 import type { GameEntry } from './games'
 import './Launcher.css'
 
+const BUILD_ID = import.meta.env.DEV ? 'dev' : __BUILD_ID__
+
 export default function Launcher({ games, onOpen }: { games: GameEntry[]; onOpen: (id: string) => void }) {
   return (
     <div className="launcher">
@@ -21,6 +23,7 @@ export default function Launcher({ games, onOpen }: { games: GameEntry[]; onOpen
           </li>
         ))}
       </ul>
+      <p className="build-id">{BUILD_ID}</p>
     </div>
   )
 }

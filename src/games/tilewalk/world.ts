@@ -6,7 +6,8 @@ export const ROWS = 10
 export const COLS = 4
 /**
  * Crumbling tiles in each row (row 1 first). There is no tell, and every fall
- * reshuffles the dungeon, so each attempt is blind: (1/2)^8 · (1/4)^2 = 1 in 4096.
+ * reshuffles the dungeon, so a hesitant attempt is blind: (1/2)^8 · (1/4)^2 = 1 in 4096.
+ * The secret (see CONFIDENCE_WINDOW in engine.ts): hop again quickly and the tile holds.
  */
 export const TRAPS_PER_ROW = [2, 2, 2, 2, 2, 2, 2, 2, 3, 3]
 
